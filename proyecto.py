@@ -1,3 +1,7 @@
+def app():
+    # Muestra el menu de opciones
+    mostrar_menu()
+
 def mostrar_menu():
     print('Selecciones del menu:')
     print('1 - Agregar contacto')
@@ -7,3 +11,5 @@ def mostrar_menu():
     print('5 - Borrar contacto')
     print('6 - Salir')
 
+
+app()
