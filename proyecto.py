@@ -5,8 +5,6 @@ CARPETA = 'contactos/'
 EXTENSION = '.txt'
 
 # Contactos
-
-
 class Contacto:
     def __init__(self, nombre, telefono, categoria):
         self.nombre = nombre
@@ -74,25 +72,34 @@ def agregar_contacto():
     nombre_contacto = input('Nombre del contacto: \r\n')
 
     ruta_file = CARPETA + nombre_contacto + EXTENSION
+    # Revisar si el archivo ya existe
+    existe = existe_contacto(ruta_file)
 
-    with open(ruta_file, 'w') as archivo:
-        telefono_contacto = input('Agrega el telefono: \r\n')
-        categoria_contacto = input(
-            'Agrega una categoria del contacto: \r\n')
+    if not existe:
+        with open(ruta_file, 'w') as archivo:
+            telefono_contacto = input('Agrega el telefono: \r\n')
+            categoria_contacto = input(
+                'Agrega una categoria del contacto: \r\n')
 
-        # instanciar la clase
-        contacto = Contacto(
-            nombre_contacto, telefono_contacto, categoria_contacto)
+            # instanciar la clase
+            contacto = Contacto(
+                nombre_contacto, telefono_contacto, categoria_contacto)
 
-        # Escribir en el contacto
-        archivo.write('Nombre: '+contacto.nombre+'\r\n')
-        archivo.write('Telefono: '+contacto.telefono+'\r\n')
-        archivo.write('Categoria: '+contacto.categoria+'\r\n')
+            # Escribir en el contacto
+            archivo.write('Nombre: '+contacto.nombre+'\r\n')
+            archivo.write('Telefono: '+contacto.telefono+'\r\n')
+            archivo.write('Categoria: '+contacto.categoria+'\r\n')
 
-        # Msg de exito
-        print('\r\n Contacto creado correctamente \r\n')
+            # Msg de exito
+            print('\r\n Contacto creado correctamente \r\n')
+    else:
+        print('Ese contacto ya existe')
+        # reiniciar App
+        app()
 
-    app()
+
+def existe_contacto(ruta_file):
+    return os.path.isfile(ruta_file)
 
 
 def crear_directorio():
