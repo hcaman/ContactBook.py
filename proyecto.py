@@ -68,6 +68,14 @@ def buscar_contacto():
 
 def mostrar_contacto():
     archivos = os.listdir(CARPETA)
+    archivos_text = [i for i in archivos if i.endswith(EXTENSION)]
+    for archivo in archivos_text:
+        with open(CARPETA + archivo) as contacto:
+            for linea in contacto:
+                # imprime contenidos
+                print(linea.rstrip())
+            # imprime separador
+            print('\r\n')
 
 
 def editar_contacto():
