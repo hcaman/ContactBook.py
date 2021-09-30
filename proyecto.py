@@ -53,6 +53,13 @@ def app():
 
 def eliminar_contacto():
     nombre = input('Escriba el nombre del contacto que desea eliminar: \r\n')
+    try:
+        os.remove(CARPETA + nombre + EXTENSION)
+        print('El archivo eliminado correctamente')
+    except IOError:
+        print('El contacto no existe')
+        # print(IOError)
+        app()
 
 
 def buscar_contacto():
