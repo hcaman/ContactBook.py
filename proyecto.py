@@ -2,6 +2,17 @@ import os
 
 # Variables goblales
 CARPETA = 'contactos/'
+EXTENSION = '.txt'
+
+# Contactos
+
+
+class Contacto:
+    def __init__(self, nombre, telefono, categoria):
+        self.nombre = nombre
+        self.telefono = telefono
+        self.categoria = categoria
+
 
 def app():
     # Revisa si la carpeta existe, sino la crea
@@ -60,6 +71,29 @@ def editar_contacto():
 
 def agregar_contacto():
     print('Escribe los datos para agregar el nuevo contacto:')
+    nombre_contacto = input('Nombre del contacto: \r\n')
+
+    ruta_file = CARPETA + nombre_contacto + EXTENSION
+
+    with open(ruta_file, 'w') as archivo:
+        telefono_contacto = input('Agrega el telefono: \r\n')
+        categoria_contacto = input(
+            'Agrega una categoria del contacto: \r\n')
+
+        # instanciar la clase
+        contacto = Contacto(
+            nombre_contacto, telefono_contacto, categoria_contacto)
+
+        # Escribir en el contacto
+        archivo.write('Nombre: '+contacto.nombre+'\r\n')
+        archivo.write('Telefono: '+contacto.telefono+'\r\n')
+        archivo.write('Categoria: '+contacto.categoria+'\r\n')
+
+        # Msg de exito
+        print('\r\n Contacto creado correctamente \r\n')
+
+    app()
+
 
 def crear_directorio():
     if not os.path.exists(CARPETA):
