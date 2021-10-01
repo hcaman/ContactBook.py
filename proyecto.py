@@ -64,6 +64,18 @@ def eliminar_contacto():
 
 def buscar_contacto():
     nombre = input('Escriba el nombre del contacto que desea buscar: \r\n')
+    try:
+        with open(CARPETA + nombre + EXTENSION) as contacto:
+            print('\r\n Informacion del contacto: \r\n')
+            for linea in contacto:
+                # imprime contenidos
+                print(linea.rstrip())
+            # imprime separador
+            print('\r\n')
+    except IOError:
+        print('El archivo no existe')
+        app()
+        # print(IOError)
 
 
 def mostrar_contacto():
