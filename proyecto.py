@@ -80,6 +80,39 @@ def mostrar_contacto():
 
 def editar_contacto():
     print('Escribe el nombre del contacto')
+    nombre_anterior = input('Nombre del contacto que desea editar: \r\n')
+
+    ruta_file = CARPETA + nombre_anterior + EXTENSION
+    # Revisar si el archivo ya existe
+    existe = existe_contacto(ruta_file)
+
+    if existe:
+        with open(ruta_file, 'w') as archivo:
+            nombre_contacto = input('Agrega el nuevo nombre: \r\n')
+            telefono_contacto = input('Agrega el nuevo telefono: \r\n')
+            categoria_contacto = input(
+                'Agrega una nueva categoria del contacto: \r\n')
+
+            # instanciar la clase
+            contacto = Contacto(
+                nombre_contacto, telefono_contacto, categoria_contacto)
+
+            # Escribir en el contacto
+            archivo.write('Nombre: '+contacto.nombre+'\r\n')
+            archivo.write('Telefono: '+contacto.telefono+'\r\n')
+            archivo.write('Categoria: '+contacto.categoria+'\r\n')
+
+            # Cerramos archivo
+            archivo.close()
+
+            # Renombrar archivo
+            os.rename(ruta_file, CARPETA + nombre_contacto + EXTENSION)
+
+            # Msg de exito
+            print('\r\n Contacto editado correctamente \r\n')
+    else:
+        print('Ese contacto no existe')
+        app()
 
 
 def agregar_contacto():
